@@ -16,16 +16,19 @@ form {
 
 <h1 align="center"> Mo's top recommendations: </h1>
 
+<h3 align="center"> Now showing movies similar to '{{ original_input.title }}' </h3>
+
 <div class="result" align="center">
+	<ul>
 	{% for title in result.reco %}
-		<b> title.name </b>
+		<li> {{ title }} </li>
 	{% endfor %}
-  
+	</ul>
   <br>
   
-  <p>View these movies here: <a href="">{{}}</a>  </p>
   
-  <a href="{{ url_for('index') }}" class="btn btn-default">Back</a>
+  
+  <a href="{{ url_for('main') }}" class="btn btn-default">Back</a>
 </div>
 
 </html> 

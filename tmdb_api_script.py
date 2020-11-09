@@ -5,7 +5,7 @@ tmdb = TMDb() #initiate API with key
 tmdb.api_key = 'e37d84894950becf35214f1f9ab0e0a9'
 from ast import literal_eval
 movie=Movie() 
-input_term=input()
+# input_term=input()
 def call_api(input_term): #call TMDB API first for search then for the rest of the movie details
     search = movie.search(input_term)
     res_id=search[0].id
@@ -29,7 +29,7 @@ def call_api(input_term): #call TMDB API first for search then for the rest of t
     movie_metadata['vote_average']=res.vote_average
     movie_metadata['vote_count']=res.vote_count
     return movie_metadata
-print(call_api(input_term))
+# print(call_api(input_term))
     
     
     

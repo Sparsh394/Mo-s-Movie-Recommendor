@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import sigmoid_kernel, cosine_similarity
 import numpy as np
 from ast import literal_eval
-movie_df=pd.read_csv("C://Users//Test//Downloads//archive/tmdb_5000_movies.csv") #reading data
+movie_df=pd.read_csv(r"tmdb_5000_movies.csv") #reading data
 movie_df['genres'] = movie_df['genres'].apply(literal_eval) #applying preprocessing and removing unwanted data
 movie_df['keywords'] = movie_df['keywords'].apply(literal_eval)
 movie_df['genres'] = movie_df['genres'].apply(lambda x: [y['name'] for y in x])
@@ -18,7 +18,8 @@ movie_df.drop(columns=['budget','original_title','production_companies','product
 movie_df['description']=movie_df['tagline'].fillna(" ")+" "+movie_df['overview'].fillna(" ")
 movie_df['title']=movie_df['title'].str.lower()
 movie_df['description']=movie_df['description'].str.lower()
-sample_row=movie_df.sample(n=1) #sample row that will be replaced by code to integrate data returned by TMDB scraping API
+# sample_row=movie_df.sample(n=1) #sample row that will be replaced by code to integrate data returned by TMDB scraping API 
+
 def recommender_system(movie_metadata): #recommender function
     movie_metadata['title']=movie_metadata['title'].str.lower()
     movie_metadata['description']=movie_metadata['tagline'].fillna(" ")+" "+movie_metadata['overview'].fillna(" ")
@@ -39,4 +40,5 @@ def recommender_system(movie_metadata): #recommender function
     required_movies=movie_df.iloc[movie_indices]
     required_movies=required_movies.sort_values('vote_average',ascending=False)
     return required_movies
-print(recommender_system(sample_row)) #placeholder for testing
+    
+# print(recommender_system(sample_row)) #placeholder for testing

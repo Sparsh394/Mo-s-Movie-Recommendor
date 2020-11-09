@@ -12,9 +12,9 @@ Bootstrap(app)
 tmdb = TMDb() 
 tmdb.api_key = 'e37d84894950becf35214f1f9ab0e0a9'
     
-recommender = pickle.load(open(r'recommender_function.sav', 'rb'))
-apiCall = pickle.load(open(r'call_api.sav', 'rb'))
-
+# recommender = pickle.load(open(r'recommender_function.sav', 'rb'))
+# apiCall = pickle.load(open(r'call_api.sav', 'rb'))
+    
 @app.route('/', methods=['POST', 'GET'])
 
 def main():
@@ -29,16 +29,27 @@ def main():
         # df=pd.read_csv("tmdb_5000_movies.csv")
         # metadata = df.loc[df['title'] == title.str.lower()]
         
-        metadata = apiCall(title)
+        # metadata = apiCall(title)
+        metadata = tmdb_api_script.call_api(title)
         
-        reco = recommender(metadata)
+        print('Queried movie: ')
+        print(metadata)
+        
+        # reco = recommender(metadata)
+        reco = recommender_system.recommender_system(metadata)
         
         print('The recommended movies are: \n')
-        print(reco)
+        print(reco['title'])
         
-        result = {'reco': reco}
+        recommendations = []
         
-        return render_template('show.html', result=result)
+        for i in reco['title']: 
+            recommendations.append(i.title())
+        
+        result = {'reco': recommendations}
+        inputTitle = {'title': metadata['title'][0].title()}
+        
+        return render_template('show.html', original_input = inputTitle, result=result)
 
 if __name__ == '__main__':
     # recommender = pickle.load(open(r'recommender_function.sav', 'rb'))
