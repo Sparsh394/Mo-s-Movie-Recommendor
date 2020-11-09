@@ -1,0 +1,31 @@
+<!doctype html>
+
+<style>
+form {
+    margin: auto;
+    width: 35%;
+}
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+}
+</style>
+
+<title> Mo's Movie Recommendation Engine </title>
+
+<h1 align="center"> Mo's top recommendations: </h1>
+
+<div class="result" align="center">
+	{% for title in result.reco %}
+		<b> title.name </b>
+	{% endfor %}
+  
+  <br>
+  
+  <p>View these movies here: <a href="">{{}}</a>  </p>
+  
+  <a href="{{ url_for('index') }}" class="btn btn-default">Back</a>
+</div>
+
+</html> 
