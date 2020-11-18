@@ -12,11 +12,13 @@ form {
 }
 </style>
 
-<title> Mo's Movie Recommendation Engine </title>
+<head><title> Mo's Movie Recommendation Engine </title></head>
 
+<h1 align="center"> Mo's Movie Recommendation Engine </h1> 
+<hr>
 	<div class="container" align="center">
-		<h1>Enter the title of the movie</h1>
-		<hr>
+		<h2>Enter the title of the movie</h2>
+		
 		<form class="form-inline" action="{{ url_for('main') }}" method="POST" enctype="multipart/form-data">
 			<div class="form-group">
 				<input type="string" name="title" class="btn btn-default">

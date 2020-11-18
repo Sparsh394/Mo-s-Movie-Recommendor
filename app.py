@@ -1,10 +1,12 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, make_response
 from flask_bootstrap import Bootstrap
 from tmdbv3api import TMDb, Movie 
 import os
 import pickle
 import recommender_system
 import tmdb_api_script
+import justwatch_scraper
+import buildOP
 
 app = Flask(__name__, template_folder='templates')
 Bootstrap(app)
@@ -12,46 +14,45 @@ Bootstrap(app)
 tmdb = TMDb() 
 tmdb.api_key = 'e37d84894950becf35214f1f9ab0e0a9'
     
-# recommender = pickle.load(open(r'recommender_function.sav', 'rb'))
-# apiCall = pickle.load(open(r'call_api.sav', 'rb'))
-    
 @app.route('/', methods=['POST', 'GET'])
 
 def main():
     if request.method == 'GET':
-        return render_template('index.html')
+        response = make_response(render_template('index.html'))
+        response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+        
+        return response
 
     if request.method == 'POST':
-        # recommender = pickle.load(open(r'recommender_function.sav', 'rb'))
-        
         title = request.form['title']
+        # print(request.form)
+        # print()
+        # print(request.form['title'])
         
-        # df=pd.read_csv("tmdb_5000_movies.csv")
-        # metadata = df.loc[df['title'] == title.str.lower()]
-        
-        # metadata = apiCall(title)
         metadata = tmdb_api_script.call_api(title)
         
-        print('Queried movie: ')
-        print(metadata)
-        
-        # reco = recommender(metadata)
         reco = recommender_system.recommender_system(metadata)
         
-        print('The recommended movies are: \n')
-        print(reco['title'])
-        
-        recommendations = []
+        results = {}
+        # print(reco['title'])
         
         for i in reco['title']: 
-            recommendations.append(i.title())
+            results[i.title()] = justwatch_scraper.get_links(i)
         
-        result = {'reco': recommendations}
-        inputTitle = {'title': metadata['title'][0].title()}
+        # print(results) 
         
-        return render_template('show.html', original_input = inputTitle, result=result)
+        display = buildOP.build_display(metadata['title'][0].title(), results) 
+        display_file= open("templates/display.html","w")
+        display_file.write(display)
+        display_file.close()
+        
+        # print(display)
+        
+        response = make_response(render_template('display.html'))
+        response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+        
+        return response
 
 if __name__ == '__main__':
-    # recommender = pickle.load(open(r'recommender_function.sav', 'rb'))
     app.run(debug=True)
     

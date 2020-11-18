@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html>
+<head>
+<title>Test Display</title>
+</head>
+
+<h1>Hello world.</h1>
+
+<style>
+form {
+    margin: auto;
+    width: 35%;
+}
+
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 10px;
+}
+
+#link-category {
+	-webkit-transform: rotate(-90deg); 
+	-moz-transform: rotate(-90deg); 
+	-ms-transform: rotate(-90deg); 
+	-o-transform: rotate(-90deg); 
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
+	transform: rotate(-90deg);
+	
+	background-color: #282828;
+	color: white;
+}
+
+#table01 {
+	border: 1px solid black;
+}
+</style>
+
+<h2> Hello </h2>
+
+<form action="{{ url_for('main') }}" method="POST">
+	<input type="submit">
+</form>
+
+</html>

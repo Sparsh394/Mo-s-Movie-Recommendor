@@ -5,25 +5,62 @@ form {
     margin: auto;
     width: 35%;
 }
+
 .result {
     margin: auto;
     width: 35%;
     border: 1px solid #ccc;
 }
+
+th, td {
+  padding: 10px;
+}
+
+#link-category {
+	-webkit-transform: rotate(-90deg); 
+	-moz-transform: rotate(-90deg); 
+	-ms-transform: rotate(-90deg); 
+	-o-transform: rotate(-90deg); 
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
+	transform: rotate(-90deg);
+	
+	background-color: #282828
+	color: white
+}
+
+#table01 {
+	border: 1px solid black;
+}
 </style>
 
-<title> Mo's Movie Recommendation Engine </title>
+<head><title> Mo's Movie Recommendation Engine </title></head>
 
 <h1 align="center"> Mo's top recommendations: </h1>
 
 <h3 align="center"> Now showing movies similar to '{{ original_input.title }}' </h3>
 
 <div class="result" align="center">
-	<ul>
-	{% for title in result.reco %}
-		<li> {{ title }} </li>
-	{% endfor %}
-	</ul>
+	<table>
+		<tr>
+			<th> Movie </th> 
+			<th> Watch here </th>
+		</tr>
+	
+		{% for movie in result.reco %}
+			<tr>
+				<td> {{ movie.title }} </td>
+				<td>
+					<table id="table01">
+						{% for cat in movie.categories %}
+							<tr>  
+								<td id="table01"> <div id="link-category"> {{ cat }} </div> </td>
+								<td id="table01"> for link in cat.links </td>
+							</tr>
+						{% endfor %}
+					</table>
+			</tr>
+		{% endfor %}
+	</table>
   <br>
   
   

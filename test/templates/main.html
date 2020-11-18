@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html>
+<head>
+<title>Test Display</title>
+</head>
+
+<h1>Hello world.</h1>
+
+<style>
+form {
+    margin: auto;
+    width: 35%;
+}
+
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 10px;
+}
+
+#link-category {
+	-webkit-transform: rotate(-90deg); 
+	-moz-transform: rotate(-90deg); 
+	-ms-transform: rotate(-90deg); 
+	-o-transform: rotate(-90deg); 
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
+	transform: rotate(-90deg);
+	
+	background-color: #282828
+	color: white
+}
+
+#table01 {
+	border: 1px solid black;
+}
+</style>
+
+<div class="result" align="center">
+	<table>
+		<tr>
+			<th> Movie </th> 
+			<th> Watch here </th>
+		</tr>
+	
+		{% for movie in result %}
+			<tr>
+				<td> {{ movie }} </td>
+				<td>
+					<table id="table01">
+						{% for cat in result.movie %}
+							<tr>  
+								<td id="table01"> <div id="link-category"> {{ cat }} </div> </td>
+								<td id="table01"> {% for link in result.movie.cat %} 
+									<a href={{ link }}> {{ result.movie.cat.link.src }} </a> &emsp;
+									{% endfor %}
+								</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+
+</html>
