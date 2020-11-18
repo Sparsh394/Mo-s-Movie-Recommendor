@@ -13,14 +13,18 @@ Bootstrap(app)
 
 tmdb = TMDb() 
 tmdb.api_key = 'e37d84894950becf35214f1f9ab0e0a9'
-    
+counter=0    
 @app.route('/', methods=['POST', 'GET'])
 
 def main():
+    global counter
+    if(counter>0):
+        if(os.path.exists("display"+str(counter-1)+".html")):
+            os.remove("display"+str(counter-1)+".html")
     if request.method == 'GET':
         response = make_response(render_template('index.html'))
-        response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
-        
+        #response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+        response.cache_control.max_age = 0
         return response
 
     if request.method == 'POST':
@@ -40,19 +44,18 @@ def main():
         for i in reco['title']: 
             results[i.title()] = justwatch_scraper.get_links(i)
         
-        # print(results) 
+        #print(results) 
         
         display = buildOP.build_display(metadata['title'][0].title(), results) 
-        display_file= open("templates/display.html","w")
+        display_file= open("templates/display"+str(counter)+".html","w")
         display_file.write(display)
         display_file.close()
         
         # print(display)
         
-        response = make_response(render_template('display.html'))
+        response = make_response(render_template('display'+str(counter)+'.html'))
         response.cache_control.max_age = 0
-
-        
+        counter+=1
         return response
 
 if __name__ == '__main__':
