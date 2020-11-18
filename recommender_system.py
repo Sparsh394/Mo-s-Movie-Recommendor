@@ -21,16 +21,19 @@ movie_df['description']=movie_df['description'].str.lower()
 # sample_row=movie_df.sample(n=1) #sample row that will be replaced by code to integrate data returned by TMDB scraping API 
 
 def recommender_system(movie_metadata): #recommender function
+    global movie_df
     movie_metadata['title']=movie_metadata['title'].str.lower()
     movie_metadata['description']=movie_metadata['tagline'].fillna(" ")+" "+movie_metadata['overview'].fillna(" ")
     movie_metadata['description']=movie_metadata['description'].str.lower()
     tfidf=TfidfVectorizer(stop_words='english')
-    id_check=movie_metadata.iloc[0]['id']
-    if(id_check not in movie_df['id']):
-        movie_df.append(movie_metadata)
+    title_check=movie_metadata.iloc[0]['title']
+    if(title_check not in (movie_df['title'].tolist())):
+        movie_df=movie_df.append(movie_metadata)
     tfidf_matrix=tfidf.fit_transform(movie_df['description'].apply(lambda x: np.str_(x)))
     cosine_similarity=sigmoid_kernel(tfidf_matrix,tfidf_matrix)
-    indices = pd.Series(movie_df.index, index=movie_df['title']).drop_duplicates()
+    indices = pd.Series(movie_df.index, index=movie_df['title'])
+    print(indices.tail())
+    #print(movie_df['title'].tail())
     title_req=movie_metadata.iloc[0]['title']
     required_index=indices[title_req]
     sim_scores = list(enumerate(cosine_similarity[required_index]))
