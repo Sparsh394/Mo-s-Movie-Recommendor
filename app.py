@@ -30,6 +30,7 @@ def main():
         # print(request.form['title'])
         
         metadata = tmdb_api_script.call_api(title)
+        #print(metadata)
         
         reco = recommender_system.recommender_system(metadata)
         
@@ -49,7 +50,8 @@ def main():
         # print(display)
         
         response = make_response(render_template('display.html'))
-        response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+        response.cache_control.max_age = 0
+
         
         return response
 
