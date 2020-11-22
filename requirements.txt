@@ -1,7 +1,6 @@
 flask
 flask_bootstrap
 tmdbv3api
-pickle
 pandas
 json
 sklearn
