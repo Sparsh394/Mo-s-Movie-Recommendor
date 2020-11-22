@@ -4,15 +4,14 @@ def build_display(input, dictRes):
     doc, tag, text = Doc().tagtext() 
     
     with tag('html'): 
-        with tag('style'): 
-            text("form {margin: auto; width: 35%; } .result { margin: auto; width: 35%; border: 1px solid #ccc; } th, td { padding: 10px; align: center; } #link-category { -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);  -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); transform: rotate(-90deg); } #table01 { border: 1px solid black; }") 
-            
+        doc.stag('link', rel="stylesheet", type="text/css", href="{{ url_for('static',filename='styles/style.css') }}")
+        
         with tag('head'): 
             with tag('title'): 
                 text('Mo\'s Movie Recommendation Engine')
                 
         with tag('h1', align="center"): 
-            text('Mo\'s top recommendations:')
+            text('Mo\'s Top Recommendations:')
             
         with tag('h3', align="center"):
             text('Now showing movies similar to \"{0}\"'.format(input))

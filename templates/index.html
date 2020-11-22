@@ -1,17 +1,8 @@
 <!doctype html>
+<html>
 
-<style>
-form {
-    margin: auto;
-    width: 35%;
-}
-.result {
-    margin: auto;
-    width: 35%;
-    border: 1px solid #ccc;
-}
-</style>
-
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+	
 <head><title> Mo's Movie Recommendation Engine </title></head>
 
 <h1 align="center"> Mo's Movie Recommendation Engine </h1> 
@@ -19,11 +10,11 @@ form {
 	<div class="container" align="center">
 		<h2>Enter the title of the movie</h2>
 		
-		<form class="form-inline" action="{{ url_for('main') }}" method="POST" enctype="multipart/form-data">
+		<form class="form-inline" action="{{ url_for('main') }}" method="POST" enctype="multipart/form-data" align="center">
 			<div class="form-group">
 				<input type="string" name="title" class="btn btn-default">
 			</div>
-			<div class="form-group">
+			<div class="form-group2">
 				<input type="submit" value="Search" class="btn btn-default">
 			</div>
 		</form>

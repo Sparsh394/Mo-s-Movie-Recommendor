@@ -1,0 +1,134 @@
+@import url("font-awesome.min.css");
+@import url("http://fonts.googleapis.com/css?family=Raleway:100,200,300,500,600,700,800,900");
+
+/* Basic */
+
+	body {
+		background: #f0f0f0;
+		/* background-image: url({{ url_for("static",filename="images/bg.jpg") }});; */
+		background-image: url("images/bg.jpg"); 
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	body, span, input, select, textarea {
+		color: #202020;
+		font-family: 'Raleway', sans-serif;
+		font-size: 12pt;
+		font-weight: 300;
+		line-height: 1.65em;
+	}
+
+	a {
+		color: #000069;
+		text-decoration: underline;
+	}
+
+	/* p, ul, ol, dl, table, blockquote {
+		margin: 1em 1em 1em 1em;
+	}
+
+	p {
+		line-height: 1em;
+	}*/
+
+	h1, h2, h3, h4, h5, h6 {
+		margin: 10;
+		padding: 20;
+		color: inherit;
+		font-family: 'Raleway', sans-serif;
+		font-weight: 700;
+	}
+
+		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+	h2 {
+		font-size: 1.5em;
+	}
+
+	h3 {
+		font-size: 1.25em;
+	}
+
+/* Form */
+
+	form {
+		width: 40%;
+		margin: auto auto;
+		align: center;
+	}
+
+	input,
+	textarea {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-o-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		background: white;
+		color: black;
+		border: 3px solid black;
+		display: block;
+		outline: 10;
+		padding: 1em 1em;
+		text-decoration: none;
+		width: 100%;
+		border-radius: 6px;
+	}
+
+		input:focus,
+		textarea:focus {
+			border-color: #000000;
+		}
+
+	textarea {
+		min-height: 14em;
+	}
+	
+	.form-group2 {
+		align: center;
+		width: 20%;
+		/*width: 960px;*/
+		height: auto;
+		pading: 10px;
+		position: relative;
+		margin: 0;
+		/*position: absolute;*/
+		-ms-transform: translateX(200%);
+		transform: translateX(200%);
+	}
+	
+/* Result Div */
+	
+	.result {
+		margin: auto;
+		width: 35%;
+		border: 1px solid #ccc;
+	}
+	
+/* Result table */
+	
+	th, td { 
+		padding: 10px; 
+		align: center; 
+	} 
+	
+	#link-category { 
+		-webkit-transform: rotate(-90deg); 
+		-moz-transform: rotate(-90deg);  
+		-ms-transform: rotate(-90deg); 
+		-o-transform: rotate(-90deg); 
+		filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
+		transform: rotate(-90deg); 
+	} 
+	
+	#table01 { 
+		border: 1px solid black; 
+	}
