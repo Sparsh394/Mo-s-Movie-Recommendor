@@ -2,7 +2,6 @@ flask
 flask_bootstrap
 tmdbv3api
 pandas
-ast
 requests
 selenium
 bs4
