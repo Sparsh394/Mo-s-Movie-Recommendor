@@ -18,6 +18,9 @@ def get_links(movie):
     movie=re.sub(r'([^\s\w]|_)+', '', movie.lower().strip())
     # print(test_string)
     movie=movie.replace(' ','-')
+    
+    print('Test: ' + movie)
+    
     url='https://www.justwatch.com/in/movie/'+movie
     # print(url)
     chrome_options = webdriver.ChromeOptions()
