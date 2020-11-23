@@ -2,7 +2,6 @@ flask
 flask_bootstrap
 tmdbv3api
 pandas
-json
 sklearn
 collections
 numpy
@@ -10,8 +9,6 @@ ast
 requests
 selenium
 bs4
-re
-time
 webdriver_manager
 yattag
 gunicorn
