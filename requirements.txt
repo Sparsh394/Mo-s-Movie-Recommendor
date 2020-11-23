@@ -2,9 +2,6 @@ flask
 flask_bootstrap
 tmdbv3api
 pandas
-sklearn
-collections
-numpy
 ast
 requests
 selenium
