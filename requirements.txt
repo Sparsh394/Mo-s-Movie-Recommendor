@@ -9,4 +9,3 @@ webdriver_manager
 yattag
 gunicorn
 sklearn
-chromium-browser
