@@ -10,6 +10,9 @@ from bs4 import BeautifulSoup
 import re
 import time
 
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
 def get_links(movie): 
     movie=re.sub(r'([^\s\w]|_)+', '', movie.lower().strip())
     # print(test_string)
@@ -18,8 +21,11 @@ def get_links(movie):
     # print(url)
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.binary_location = GOOGLE_CHROME_PATH
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    driver = webdriver.Chrome('chromedriver.exe', options=chrome_options)
+    driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, options=chrome_options)
     driver.set_window_size(1920, 1080)
     driver.maximize_window() 
     driver.get(url)
