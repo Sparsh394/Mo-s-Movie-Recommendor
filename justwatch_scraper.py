@@ -25,7 +25,7 @@ def get_links(movie):
     chrome_options.add_argument('--no-sandbox')
     chrome_options.binary_location = GOOGLE_CHROME_PATH
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, options=chrome_options)
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, options=chrome_options)
     driver.set_window_size(1920, 1080)
     driver.maximize_window() 
     driver.get(url)
