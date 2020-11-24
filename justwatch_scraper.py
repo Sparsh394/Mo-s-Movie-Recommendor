@@ -59,5 +59,6 @@ def get_links(movie):
         watch_options[categories[i].text.strip()] = links
 
     # print(watch_options)
+    driver.quit()
     
     return watch_options
