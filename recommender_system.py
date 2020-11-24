@@ -30,6 +30,7 @@ def recommender_system(movie_metadata): #recommender function
     title_check=movie_metadata.iloc[0]['title']
     if(title_check not in (movie_df['title'].tolist())):
         movie_df=movie_df.append(movie_metadata)
+        movie_df.reset_index(inplace=True)
     tfidf_matrix=tfidf.fit_transform(movie_df['description'].apply(lambda x: np.str_(x)))
     cosine_similarity=sigmoid_kernel(tfidf_matrix,tfidf_matrix)
     indices = pd.Series(movie_df.index, index=movie_df['title'])
