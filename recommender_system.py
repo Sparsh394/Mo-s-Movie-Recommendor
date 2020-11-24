@@ -26,7 +26,7 @@ def recommender_system(movie_metadata): #recommender function
     movie_metadata['title']=movie_metadata['title'].str.lower()
     movie_metadata['description']=movie_metadata['tagline'].fillna(" ")+" "+movie_metadata['overview'].fillna(" ")
     movie_metadata['description']=movie_metadata['description'].str.lower()
-    movie_metadata['genres'] = movie_metadata['genres'].apply(literal_eval) #applying preprocessing and removing unwanted data
+    #movie_metadata['genres'] = movie_metadata['genres'].apply(literal_eval) #applying preprocessing and removing unwanted data
     movie_metadata['genres'] = movie_metadata['genres'].apply(lambda x: [y['name'] for y in x])
     tfidf=TfidfVectorizer(stop_words='english')
     title_check=movie_metadata.iloc[0]['title']
