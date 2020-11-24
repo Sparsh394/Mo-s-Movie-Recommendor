@@ -47,7 +47,7 @@ def recommender_system(movie_metadata): #recommender function
     movie_indices = [i[0] for i in sim_scores]
     required_movies=movie_df.iloc[movie_indices]
     genre_list=movie_metadata.iloc[0]['genres']
-    required_movies=required_movies[pd.DataFrame(required_movies.genres.tolist()).isin(movie_metadata['genres'].tolist()).any(1).values]
+    required_movies=required_movies[pd.DataFrame(required_movies.genres.tolist()).isin(genre_list).any(1).values]
     required_movies=required_movies[1:6]
     print(required_movies['title'])
     required_movies=required_movies.sort_values('vote_average',ascending=False)
