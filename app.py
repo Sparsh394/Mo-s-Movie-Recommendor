@@ -34,7 +34,7 @@ def main():
         # print(request.form['title'])
         
         metadata = tmdb_api_script.call_api(title)
-        #print(metadata)
+        print(metadata)
         
         reco = recommender_system.recommender_system(metadata)
         
