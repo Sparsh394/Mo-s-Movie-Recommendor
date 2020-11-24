@@ -43,7 +43,7 @@ def recommender_system(movie_metadata): #recommender function
     sim_scores = sim_scores[1:6]
     movie_indices = [i[0] for i in sim_scores]
     required_movies=movie_df.iloc[movie_indices]
-    print(required_movies['title])
+    print(required_movies['title'])
     required_movies=required_movies.sort_values('vote_average',ascending=False)
     return required_movies
     
