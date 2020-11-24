@@ -26,6 +26,8 @@ def recommender_system(movie_metadata): #recommender function
     movie_metadata['title']=movie_metadata['title'].str.lower()
     movie_metadata['description']=movie_metadata['tagline'].fillna(" ")+" "+movie_metadata['overview'].fillna(" ")
     movie_metadata['description']=movie_metadata['description'].str.lower()
+    movie_metadata['genres'] = movie_metadata['genres'].apply(lambda x: [y['name'] for y in x])
+    movie_metadata['genres'] = movie_metadata['genres'].apply(literal_eval)
     tfidf=TfidfVectorizer(stop_words='english')
     title_check=movie_metadata.iloc[0]['title']
     if(title_check not in (movie_df['title'].tolist())):
@@ -41,9 +43,11 @@ def recommender_system(movie_metadata): #recommender function
     required_index=indices[title_req]
     sim_scores = list(enumerate(cosine_similarity[required_index]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[1:6]
+    #sim_scores = sim_scores[1:6]
     movie_indices = [i[0] for i in sim_scores]
     required_movies=movie_df.iloc[movie_indices]
+    required_movies=required_movies[pd.DataFrame(required_movies.genres.tolist()).isin(movie_metadata['genres'].tolist()).any(1).values]
+    required_movies=required_movies[1:6]
     print(required_movies['title'])
     required_movies=required_movies.sort_values('vote_average',ascending=False)
     return required_movies
