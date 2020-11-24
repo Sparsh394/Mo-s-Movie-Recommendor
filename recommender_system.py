@@ -36,12 +36,14 @@ def recommender_system(movie_metadata): #recommender function
     #print(indices.tail())
     #print(movie_df['title'].tail())
     title_req=movie_metadata.iloc[0]['title']
+    print('title: ',title_req)
     required_index=indices[title_req]
     sim_scores = list(enumerate(cosine_similarity[required_index]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:6]
     movie_indices = [i[0] for i in sim_scores]
     required_movies=movie_df.iloc[movie_indices]
+    print(required_movies)
     required_movies=required_movies.sort_values('vote_average',ascending=False)
     return required_movies
     
